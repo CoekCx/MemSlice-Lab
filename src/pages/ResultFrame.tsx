@@ -15,14 +15,6 @@ export const ResultFrame: React.FC<ResultFrameProps> = ({
     solutionCells
 }) => {
     const [isLittleEndian, setIsLittleEndian] = useState(true);
-    const [differences, setDifferences] = useState<number[]>([]);
-
-    useEffect(() => {
-        const diffAddresses = solutionCells
-            .filter((cell, index) => cell.value !== userCells[index]?.value)
-            .map(cell => cell.address);
-        setDifferences(diffAddresses);
-    }, [userCells, solutionCells]);
 
     return (
         <div className="result-frame">
@@ -39,7 +31,8 @@ export const ResultFrame: React.FC<ResultFrameProps> = ({
                         <MemoryView
                             cells={userCells}
                             isLittleEndian={isLittleEndian}
-                            highlightAddresses={differences}
+                            comparisonCells={solutionCells}
+                            isExerciseMode={false}
                         />
                     </div>
                     <div className="solution-view">
@@ -47,7 +40,7 @@ export const ResultFrame: React.FC<ResultFrameProps> = ({
                         <MemoryView
                             cells={solutionCells}
                             isLittleEndian={isLittleEndian}
-                            highlightAddresses={differences}
+                            isExerciseMode={false}
                         />
                     </div>
                 </div>

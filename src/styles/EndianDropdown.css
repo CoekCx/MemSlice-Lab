@@ -4,19 +4,25 @@
 
 .endian-dropdown select {
     padding: 0.5rem;
-    border: 1px solid var(--secondary-color);
-    border-radius: 4px;
-    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--component-background);
+    color: var(--text-color);
     font-size: 1rem;
     cursor: pointer;
 }
 
 .endian-dropdown select:hover {
-    border-color: var(--primary-color);
+    background-color: var(--hover-color);
 }
 
 .endian-dropdown select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.endian-dropdown select option {
+    background-color: var(--component-background);
+    color: var(--text-color);
 } 
