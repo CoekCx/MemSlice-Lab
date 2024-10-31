@@ -26,11 +26,16 @@ const App: React.FC = () => {
         currentFrame: 'exercise',
     });
     const [isLittleEndian, setIsLittleEndian] = useState(true);
-    const [memoryCells, setMemoryCells] = useState<MemoryCell[]>([
-        { address: 0x1000, value: 0x12345678 },
-        { address: 0x1004, value: 0xABCDEF00 },
-        { address: 0x1008, value: 0x87654321 },
-    ]);
+    const [memoryCells, setMemoryCells] = useState<MemoryCell[]>(() => {
+        const cells: MemoryCell[] = [];
+        for (let i = 0; i < 32; i++) {
+            cells.push({
+                address: 0x1000 + i,
+                value: 0x00
+            });
+        }
+        return cells;
+    });
     const [savedSlices, setSavedSlices] = useState<Array<{
         id: string;
         name: string;
@@ -92,19 +97,18 @@ const App: React.FC = () => {
 
     // Handle memory slice actions
     const handleNewSlice = () => {
+        const newCells: MemoryCell[] = [];
+        for (let i = 0; i < 32; i++) {
+            newCells.push({
+                address: 0x1000 + i,
+                value: 0x00
+            });
+        }
         setCurrentSlice({
             code: '',
-            cells: [
-                { address: 0x1000, value: 0x12345678 },
-                { address: 0x1004, value: 0xABCDEF00 },
-                { address: 0x1008, value: 0x87654321 },
-            ]
+            cells: newCells
         });
-        setMemoryCells([
-            { address: 0x1000, value: 0x12345678 },
-            { address: 0x1004, value: 0xABCDEF00 },
-            { address: 0x1008, value: 0x87654321 },
-        ]);
+        setMemoryCells(newCells);
         setState(prev => ({
             ...prev,
             code: '',
