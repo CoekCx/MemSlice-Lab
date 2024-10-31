@@ -6,13 +6,15 @@ interface SaveSliceModalProps {
     onClose: () => void;
     onSave: (name: string) => void;
     initialName?: string;
+    onAnimationTrigger?: () => void;
 }
 
 export const SaveSliceModal: React.FC<SaveSliceModalProps> = ({
     isOpen,
     onClose,
     onSave,
-    initialName = ''
+    initialName = '',
+    onAnimationTrigger
 }) => {
     const [name, setName] = useState(initialName);
 
@@ -22,6 +24,7 @@ export const SaveSliceModal: React.FC<SaveSliceModalProps> = ({
         e.preventDefault();
         if (name.trim()) {
             onSave(name.trim());
+            onAnimationTrigger?.();
             onClose();
         }
     };

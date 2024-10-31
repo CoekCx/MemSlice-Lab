@@ -208,8 +208,12 @@ const App: React.FC = () => {
             currentSliceId: newId
         }));
 
+        setSaveAnimationTrigger(prev => !prev);
         setIsModalOpen(false);
     };
+
+    // In the App component, add this state
+    const [saveAnimationTrigger, setSaveAnimationTrigger] = useState(false);
 
     return (
         <div className="app" data-testid="app">
@@ -278,6 +282,7 @@ const App: React.FC = () => {
                             setIsLittleEndian={setIsLittleEndian}
                             onCellValueChange={handleCellValueChange}
                             code={state.code}
+                            triggerSaveAnimation={saveAnimationTrigger}
                         />
                     ) : (
                         <ResultFrame

@@ -5,6 +5,7 @@ import { EndianDropdown } from '../components/EndianDropdown';
 import { MemorySliceList } from '../components/MemorySliceList';
 import { MemoryCell } from '../types';
 import '../styles/ExerciseFrame.css';
+import { SaveSliceModal } from '../components/SaveSliceModal';
 
 interface ExerciseFrameProps {
     memoryCells: MemoryCell[];
@@ -13,6 +14,7 @@ interface ExerciseFrameProps {
     setIsLittleEndian: (value: boolean) => void;
     onCellValueChange: (address: number, newValue: number) => void;
     code: string;
+    triggerSaveAnimation?: boolean;
 }
 
 export const ExerciseFrame: React.FC<ExerciseFrameProps> = ({
@@ -22,6 +24,7 @@ export const ExerciseFrame: React.FC<ExerciseFrameProps> = ({
     setIsLittleEndian,
     onCellValueChange,
     code,
+    triggerSaveAnimation = false,
 }) => {
     const [isComparing, setIsComparing] = useState(false);
 
@@ -47,6 +50,7 @@ export const ExerciseFrame: React.FC<ExerciseFrameProps> = ({
                     comparisonMode={isComparing}
                     solution={solutionCells}
                     isExerciseMode={true}
+                    triggerSaveAnimation={triggerSaveAnimation}
                 />
                 <CodeEditor code={code} readOnly={true} />
             </div>
