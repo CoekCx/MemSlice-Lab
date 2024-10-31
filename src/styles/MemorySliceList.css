@@ -1,0 +1,42 @@
+.memory-slice-list {
+    width: 250px;
+    background-color: white;
+    border-left: 1px solid #ddd;
+    padding: 16px;
+}
+
+.slice-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.slice-actions button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+.slice-item {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.slice-item:hover {
+    background-color: var(--background-color);
+}
+
+.slice-name {
+    display: block;
+    font-weight: bold;
+}
+
+.slice-date {
+    font-size: 0.8em;
+    color: var(--secondary-color);
+} 

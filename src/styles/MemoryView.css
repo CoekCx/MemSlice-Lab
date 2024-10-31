@@ -1,0 +1,41 @@
+.memory-view {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    background-color: var(--background-color);
+}
+
+.memory-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.memory-cell .address {
+    width: 100px;
+    font-family: monospace;
+    color: var(--secondary-color);
+}
+
+.memory-cell .value {
+    width: 80px;
+    font-family: monospace;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+.memory-cell .label {
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.memory-cell.highlight {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+} 
