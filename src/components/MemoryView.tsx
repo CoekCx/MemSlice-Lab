@@ -9,6 +9,8 @@ interface MemoryViewProps {
     comparisonCells?: MemoryCell[];
     isExerciseMode?: boolean;
     highlightAddresses?: number[];
+    comparisonMode?: boolean;
+    solution?: MemoryCell[];
 }
 
 export const MemoryView: React.FC<MemoryViewProps> = ({
@@ -17,7 +19,9 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
     onCellValueChange,
     comparisonCells,
     isExerciseMode = true,
-    highlightAddresses = []
+    highlightAddresses = [],
+    comparisonMode = false,
+    solution = []
 }) => {
     const handleValueChange = (address: number, value: string) => {
         const numValue = parseInt(value, 16);
@@ -35,15 +39,27 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
         return cell.value === comparisonCell.value ? 'correct' : 'incorrect';
     };
 
+    const getCellClassName = (cell: MemoryCell) => {
+        if (!comparisonMode || !solution) return 'memory-cell';
+        
+        const solutionCell = solution.find(s => s.address === cell.address);
+        if (!solutionCell) return 'memory-cell';
+        
+        if (cell.value === solutionCell.value) {
+            return 'memory-cell correct';
+        }
+        return 'memory-cell incorrect';
+    };
+
     return (
         <div className="memory-view" style={{ marginBottom: '20px', overflowY: 'auto' }}>
-            {cells.map((cell) => {
+            {cells.map((cell, index) => {
                 const status = getCellStatus(cell);
                 const isHighlighted = highlightAddresses.includes(cell.address);
                 return (
                     <div 
                         key={cell.address} 
-                        className={`memory-cell ${status !== 'default' ? status : ''} ${isHighlighted ? 'highlighted' : ''}`}
+                        className={`${getCellClassName(cell)} ${isHighlighted ? 'highlighted' : ''}`}
                         data-group={Math.floor((cell.address - cells[0].address) / 4) % 2}
                     >
                         <div className="address">0x{cell.address.toString(16).padStart(8, '0')}</div>

@@ -10,6 +10,8 @@ import './App.css';
 import { saveMemorySlice } from './utils/memorySlice';
 import { FiList, FiPlus, FiSave } from 'react-icons/fi';
 import { SaveSliceModal } from './components/SaveSliceModal';
+import { ExerciseFrame } from './pages/ExerciseFrame';
+import { ResultFrame } from './pages/ResultFrame';
 
 interface AppState {
     code: string;
@@ -61,6 +63,18 @@ const App: React.FC = () => {
         ]
     });
 
+    // Add new state for exercise cells
+    const [exerciseCells, setExerciseCells] = useState<MemoryCell[]>(() => {
+        const cells: MemoryCell[] = [];
+        for (let i = 0; i < 32; i++) {
+            cells.push({
+                address: 0x1000 + i,
+                value: 0x00
+            });
+        }
+        return cells;
+    });
+
     // Effect to initialize solution cells when frame changes to 'exercise'
     useEffect(() => {
         if (state.currentFrame === 'exercise') {
@@ -72,22 +86,22 @@ const App: React.FC = () => {
     const handleFrameChange = (frame: 'exercise' | 'result') => {
         setState(prevState => ({ ...prevState, currentFrame: frame }));
         if (frame === 'exercise') {
-            // Reset memory cells to initial state when switching to exercise mode
-            setMemoryCells([...solutionCells]);
+            // Reset exercise cells to initial state
+            setExerciseCells([...memoryCells.map(cell => ({ ...cell, value: 0x00 }))]);
         }
     };
 
     // Handle memory cell value changes
     const handleCellValueChange = (address: number, newValue: number) => {
         if (state.currentFrame === 'exercise') {
-            setMemoryCells(cells =>
+            setExerciseCells(cells =>
                 cells.map(cell =>
                     cell.address === address ? { ...cell, value: newValue } : cell
                 )
             );
         } else {
             // In result mode, update the solution
-            setSolutionCells(cells =>
+            setMemoryCells(cells =>
                 cells.map(cell =>
                     cell.address === address ? { ...cell, value: newValue } : cell
                 )
@@ -232,7 +246,7 @@ const App: React.FC = () => {
                     currentFrame={state.currentFrame}
                     onFrameChange={handleFrameChange}
                     code={state.code}
-                    memoryState={state.memoryState}
+                    memoryState={memoryCells}
                     currentSliceId={state.currentSliceId}
                 />
                 <EndianDropdown
@@ -256,25 +270,26 @@ const App: React.FC = () => {
                 )}
                 
                 <div className="main-workspace">
-                    <div className="memory-view-container">
-                        <div className="container-title">Memory View</div>
-                        <MemoryView
-                            cells={memoryCells}
+                    {state.currentFrame === 'exercise' ? (
+                        <ExerciseFrame
+                            memoryCells={exerciseCells}
+                            solutionCells={memoryCells}
                             isLittleEndian={isLittleEndian}
+                            setIsLittleEndian={setIsLittleEndian}
                             onCellValueChange={handleCellValueChange}
-                            comparisonCells={state.currentFrame === 'result' ? solutionCells : undefined}
-                            isExerciseMode={state.currentFrame === 'exercise'}
-                        />
-                    </div>
-                    
-                    <div className="code-editor-container">
-                        <div className="container-title">Code Editor</div>
-                        <CodeEditor
                             code={state.code}
-                            readOnly={state.currentFrame === 'exercise'}
-                            onChange={handleCodeChange}
                         />
-                    </div>
+                    ) : (
+                        <ResultFrame
+                            userCells={exerciseCells}
+                            solutionCells={memoryCells}
+                            isLittleEndian={isLittleEndian}
+                            setIsLittleEndian={setIsLittleEndian}
+                            onCellValueChange={handleCellValueChange}
+                            code={state.code}
+                            onCodeChange={handleCodeChange}
+                        />
+                    )}
                 </div>
             </main>
             {isModalOpen && (

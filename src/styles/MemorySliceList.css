@@ -1,13 +1,11 @@
 .memory-slice-list {
     padding: 1rem;
-    background-color: var(--component-background);
 }
 
 .memory-slice-list h3 {
     margin: 0 0 1rem 0;
     font-size: 1rem;
     color: var(--text-color);
-    font-weight: 500;
 }
 
 .slice-list {

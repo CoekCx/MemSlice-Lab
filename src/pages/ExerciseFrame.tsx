@@ -6,18 +6,24 @@ import { MemorySliceList } from '../components/MemorySliceList';
 import { MemoryCell } from '../types';
 import '../styles/ExerciseFrame.css';
 
-export const ExerciseFrame: React.FC = () => {
-    const [isLittleEndian, setIsLittleEndian] = useState(true);
-    const [memoryCells, setMemoryCells] = useState<MemoryCell[]>([]);
-    const [code, setCode] = useState('');
+interface ExerciseFrameProps {
+    memoryCells: MemoryCell[];
+    solutionCells: MemoryCell[];
+    isLittleEndian: boolean;
+    setIsLittleEndian: (value: boolean) => void;
+    onCellValueChange: (address: number, newValue: number) => void;
+    code: string;
+}
 
-    const handleCellValueChange = (address: number, newValue: number) => {
-        setMemoryCells(cells =>
-            cells.map(cell =>
-                cell.address === address ? { ...cell, value: newValue } : cell
-            )
-        );
-    };
+export const ExerciseFrame: React.FC<ExerciseFrameProps> = ({
+    memoryCells,
+    solutionCells,
+    isLittleEndian,
+    setIsLittleEndian,
+    onCellValueChange,
+    code,
+}) => {
+    const [isComparing, setIsComparing] = useState(false);
 
     return (
         <div className="exercise-frame">
@@ -26,12 +32,21 @@ export const ExerciseFrame: React.FC = () => {
                     isLittleEndian={isLittleEndian}
                     onChange={setIsLittleEndian}
                 />
+                <button 
+                    className="compare-button"
+                    onClick={() => setIsComparing(!isComparing)}
+                >
+                    {isComparing ? 'Hide Comparison' : 'Compare with Solution'}
+                </button>
             </div>
             <div className="main-content">
                 <MemoryView
                     cells={memoryCells}
                     isLittleEndian={isLittleEndian}
-                    onCellValueChange={handleCellValueChange}
+                    onCellValueChange={onCellValueChange}
+                    comparisonMode={isComparing}
+                    solution={solutionCells}
+                    isExerciseMode={true}
                 />
                 <CodeEditor code={code} readOnly={true} />
             </div>

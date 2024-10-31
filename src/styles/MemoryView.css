@@ -100,4 +100,14 @@
 
 .memory-cell[data-group="3"] {
     background-color: #353535;
+}
+
+.memory-cell.correct {
+    background-color: rgba(75, 181, 67, 0.1);
+    border-color: #4BB543;
+}
+
+.memory-cell.incorrect {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: #FF0000;
 } 

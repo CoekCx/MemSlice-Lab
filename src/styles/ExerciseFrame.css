@@ -1,0 +1,62 @@
+.exercise-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.exercise-frame .top-bar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 8px;
+}
+
+.exercise-frame .main-content {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    padding: 16px;
+    height: calc(100% - 60px);
+}
+
+.exercise-frame .memory-view {
+    flex: 1;
+    min-width: 400px;
+    background-color: var(--component-background);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+}
+
+.exercise-frame .code-editor {
+    flex: 1;
+    min-width: 400px;
+    background-color: var(--component-background);
+    border-radius: var(--border-radius-lg);
+    padding: 16px;
+    overflow: hidden;
+}
+
+.compare-button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.compare-button:hover {
+    background-color: var(--hover-color);
+}
+
+.main-workspace {
+    display: flex;
+    flex: 1;
+    padding: 1.5rem;
+    overflow: hidden;
+    height: calc(100vh - 80px);
+    background-color: var(--background-color);
+} 
