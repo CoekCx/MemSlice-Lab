@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MemoryCell } from '../types';
 import '../styles/MemoryView.css';
 
@@ -11,6 +11,7 @@ interface MemoryViewProps {
     highlightAddresses?: number[];
     comparisonMode?: boolean;
     solution?: MemoryCell[];
+    triggerSaveAnimation?: boolean;
 }
 
 export const MemoryView: React.FC<MemoryViewProps> = ({
@@ -21,8 +22,21 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
     isExerciseMode = true,
     highlightAddresses = [],
     comparisonMode = false,
-    solution = []
+    solution = [],
+    triggerSaveAnimation = false
 }) => {
+    const [animatingCells, setAnimatingCells] = useState(false);
+
+    useEffect(() => {
+        if (triggerSaveAnimation) {
+            setAnimatingCells(true);
+            const timer = setTimeout(() => {
+                setAnimatingCells(false);
+            }, 400);
+            return () => clearTimeout(timer);
+        }
+    }, [triggerSaveAnimation]);
+
     const handleValueChange = (address: number, value: string) => {
         const numValue = parseInt(value, 16);
         if (!isNaN(numValue) && numValue >= 0 && numValue <= 0xFF && onCellValueChange) {
@@ -52,7 +66,10 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
     };
 
     return (
-        <div className="memory-view" style={{ marginBottom: '20px', overflowY: 'auto' }}>
+        <div 
+            className={`memory-view ${animatingCells ? 'save-animation' : ''}`} 
+            style={{ marginBottom: '20px', overflowY: 'auto' }}
+        >
             {cells.map((cell, index) => {
                 const status = getCellStatus(cell);
                 const isHighlighted = highlightAddresses.includes(cell.address);

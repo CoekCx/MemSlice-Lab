@@ -110,4 +110,24 @@
 .memory-cell.incorrect {
     background-color: rgba(255, 0, 0, 0.1);
     border-color: #FF0000;
+}
+
+@keyframes savePulse {
+    0% {
+        transform: scale(1);
+        background-color: var(--toolbar-background);
+    }
+    50% {
+        transform: scale(1.02);
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    100% {
+        transform: scale(1);
+        background-color: var(--toolbar-background);
+    }
+}
+
+.save-animation {
+    animation: savePulse 0.4s ease-in-out;
 } 
