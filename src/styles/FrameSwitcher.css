@@ -1,0 +1,33 @@
+.frame-switcher {
+    display: flex;
+}
+
+.switcher-button {
+    width: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.switcher-button:hover {
+    background-color: var(--background-tertiary);
+}
+
+.switcher-button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+} 

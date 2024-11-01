@@ -1,0 +1,70 @@
+.memory-slice-list {
+    padding: 1rem;
+}
+
+.memory-slice-list h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.slice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.slice-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--component-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slice-item:hover {
+    background-color: var(--hover-color);
+}
+
+.slice-info {
+    flex: 1;
+}
+
+.slice-name {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.slice-timestamp {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.delete-button {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.slice-item:hover .delete-button {
+    opacity: 1;
+}
+
+.delete-button:hover {
+    color: var(--error-color);
+}
+
+.no-slices {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 1rem;
+} 
