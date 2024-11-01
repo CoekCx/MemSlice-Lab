@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# MemSlice Lab
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MemSlice Lab is an interactive web application designed to help students and developers understand memory layouts, endianness, and pointer arithmetic in C/C++ programming. The application provides a visual representation of memory cells and allows users to experiment with different memory configurations.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 1. Memory Visualization
+- Interactive memory cell display with hexadecimal values
+- Real-time updates and value editing
+- Visual comparison between user input and expected solutions
+- Support for both Little Endian and Big Endian representations
 
-### `npm start`
+### 2. Code Integration
+- Built-in C/C++ code editor with syntax highlighting
+- Predefined examples demonstrating various memory concepts:
+  - Struct layouts
+  - Pointer arithmetic
+  - Array representations
+  - Multi-level pointers
+  - Nested structures
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 3. Exercise Mode
+- Practice mode for testing understanding
+- Solution comparison feature
+- Instant feedback on correct/incorrect values
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Example Frames
+- **Without Solution Comparison**  
+  ![Exercise Frame 1](https://github.com/user-attachments/assets/9bb8de39-c004-4d15-b642-946fc9b72358)
 
-### `npm test`
+- **With Solution Comparison**  
+  ![Exercise Frame 2](https://github.com/user-attachments/assets/b1317912-719c-457f-8cee-c33a605c101f)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. Memory Slice Management
+- Save and load custom memory configurations
+- Predefined examples for common memory patterns
+- Local storage integration for persistent saves
 
-### `npm run build`
+#### Result Frame Example
+- **Result Frame**
+  ![Result Frame](https://github.com/user-attachments/assets/a9b6da52-ad7f-4243-aacf-8ff19706ec3f)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open http://localhost:3000 in your browser
